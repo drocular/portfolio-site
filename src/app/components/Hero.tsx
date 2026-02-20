@@ -7,18 +7,16 @@ function AmbientGlow() {
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
       {/* Large teal blob — visible top-right, exits off top-left, gone, re-enters from bottom */}
       <motion.div
-        className="absolute rounded-full"
+        className="absolute rounded-full w-[350px] h-[350px] md:w-[700px] md:h-[700px]"
         style={{
-          width: 700,
-          height: 700,
           top: '-10%',
-          right: '-5%',
+          right: '-15%',
           background: 'radial-gradient(circle, rgba(48, 179, 206, 0.35) 0%, rgba(48, 179, 206, 0.08) 40%, transparent 65%)',
-          filter: 'blur(50px)',
+          filter: 'blur(40px)',
         }}
         animate={{
-          x: [0, -400, -1200, -800, -1000, -200, 0],
-          y: [0, 100, -800, 600, 200, -100, 0],
+          x: [0, -200, -600, -400, -500, -100, 0],
+          y: [0, 50, -400, 300, 100, -50, 0],
           scale: [1, 1.1, 0.8, 0.9, 1.15, 1.05, 1],
         }}
         transition={{
@@ -31,18 +29,16 @@ function AmbientGlow() {
 
       {/* Smaller teal blob — visible bottom-left, exits off right, gone, re-enters from top-left */}
       <motion.div
-        className="absolute rounded-full"
+        className="absolute rounded-full w-[280px] h-[280px] md:w-[500px] md:h-[500px]"
         style={{
-          width: 500,
-          height: 500,
           bottom: '-5%',
-          left: '5%',
+          left: '-5%',
           background: 'radial-gradient(circle, rgba(48, 179, 206, 0.28) 0%, rgba(48, 179, 206, 0.06) 40%, transparent 65%)',
-          filter: 'blur(45px)',
+          filter: 'blur(35px)',
         }}
         animate={{
-          x: [0, 300, 1200, 800, -200, -100, 0],
-          y: [0, -200, -600, -900, -300, 100, 0],
+          x: [0, 150, 500, 350, -100, -50, 0],
+          y: [0, -100, -300, -450, -150, 50, 0],
           scale: [1, 1.12, 0.85, 0.9, 1.1, 1.05, 1],
         }}
         transition={{
@@ -56,18 +52,16 @@ function AmbientGlow() {
 
       {/* Indigo accent — visible center-left, exits off bottom-right, gone, re-enters from top */}
       <motion.div
-        className="absolute rounded-full"
+        className="absolute rounded-full w-[300px] h-[300px] md:w-[550px] md:h-[550px]"
         style={{
-          width: 550,
-          height: 550,
           top: '15%',
-          left: '20%',
+          left: '10%',
           background: 'radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0.05) 40%, transparent 65%)',
-          filter: 'blur(55px)',
+          filter: 'blur(45px)',
         }}
         animate={{
-          x: [0, 400, 1000, 600, -300, -100, 0],
-          y: [0, 200, 800, -700, -400, -50, 0],
+          x: [0, 200, 450, 300, -150, -50, 0],
+          y: [0, 100, 350, -300, -200, -25, 0],
           scale: [1, 1.15, 0.8, 0.9, 1.2, 1.05, 1],
           opacity: [0.8, 1, 0.6, 0.5, 1, 0.8, 0.8],
         }}
