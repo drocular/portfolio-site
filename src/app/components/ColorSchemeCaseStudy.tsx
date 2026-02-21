@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CaseStudyLayout } from './CaseStudyLayout';
 import { Section } from './Section';
 import { AnimatedSection } from './AnimatedSection';
@@ -6,8 +7,55 @@ import { NarrativeBreak } from './NarrativeBreak';
 import { TensionPair } from './TensionPair';
 import { EvidenceStrip } from './EvidenceStrip';
 import { OutcomeGrid } from './OutcomeGrid';
+import { CaseStudyGallery, type GalleryImage } from './CaseStudyGallery';
+import { GalleryThumbnail } from './GalleryThumbnail';
+
+const galleryImages: GalleryImage[] = [
+  {
+    src: 'https://picsum.photos/seed/cs-palette/600/400',
+    alt: 'Color palette overview showing 10 full-spectrum palettes',
+    caption: 'Full-spectrum palette architecture',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-tokens/500/700',
+    alt: 'Token hierarchy diagram from raw values to component tokens',
+    caption: 'Four-layer token hierarchy',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-figma/600/450',
+    alt: 'Figma variables panel showing shared color tokens',
+    caption: 'Shared Figma variables panel',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-audit/400/500',
+    alt: 'Before and after color audit comparison',
+    caption: 'Color audit — before and after',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-semantic/700/400',
+    alt: 'Semantic color mapping across both design systems',
+    caption: 'Semantic color mapping',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-component/500/600',
+    alt: 'Component tokens applied to button variants',
+    caption: 'Component token usage in buttons',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-a11y/600/350',
+    alt: 'Accessibility contrast ranges built into palettes',
+    caption: 'Built-in accessibility ranges',
+  },
+  {
+    src: 'https://picsum.photos/seed/cs-adoption/500/400',
+    alt: 'Team adoption metrics dashboard',
+    caption: 'Cross-team adoption dashboard',
+  },
+];
 
 export function ColorSchemeCaseStudy() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <CaseStudyLayout
       studyId="color-scheme"
@@ -139,6 +187,19 @@ export function ColorSchemeCaseStudy() {
             Colors grouped by purpose: Brand, Text, Background, Status, Action, System. Both libraries connected to a single set of Figma Variables, with components refactored to use tokens at the appropriate level. A designer changing a semantic token would see the change ripple through every component that referenced it, in both systems, instantly.
           </p>
         </AnimatedSection>
+
+        <AnimatedSection delay={0.4}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[4]}
+              index={4}
+              onClick={setLightboxIndex}
+            />
+          </div>
+        </AnimatedSection>
       </Section>
 
       {/* --- Outcomes --- */}
@@ -170,6 +231,14 @@ export function ColorSchemeCaseStudy() {
         label="The deeper lesson"
         insight="The real skill wasn't designing a color system. It was recognizing that an entire org treating fragmentation as normal was itself a design signal. The best infrastructure work starts by questioning what everyone else has accepted as a given."
         context="Most people see two incompatible systems and think 'how do we pick one?' The better question is always 'what layer makes the incompatibility irrelevant?'"
+      />
+
+      <CaseStudyGallery
+        heading="Project gallery"
+        images={galleryImages}
+        lightboxIndex={lightboxIndex}
+        onImageClick={setLightboxIndex}
+        onClose={() => setLightboxIndex(null)}
       />
     </CaseStudyLayout>
   );
