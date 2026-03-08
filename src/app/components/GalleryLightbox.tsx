@@ -82,13 +82,14 @@ export function GalleryLightbox({ images, initialIndex, isOpen, onClose }: Galle
             </DialogPrimitive.Overlay>
 
             {/* Content */}
-            <DialogPrimitive.Content asChild onKeyDown={handleKeyDown}>
+            <DialogPrimitive.Content asChild onKeyDown={handleKeyDown} onInteractOutside={(e) => e.preventDefault()}>
               <motion.div
                 className="fixed inset-0 z-50 flex flex-col items-center justify-center outline-none"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3, ease: EASE }}
+                onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
               >
                 {/* Accessible title (hidden) */}
                 <DialogPrimitive.Title className="sr-only">
@@ -119,10 +120,11 @@ export function GalleryLightbox({ images, initialIndex, isOpen, onClose }: Galle
                     {images.map((image, index) => (
                       <div
                         key={index}
-                        className="flex-[0_0_100%] min-w-0 flex items-center justify-center px-4"
+                        className="flex-[0_0_100%] min-w-0 flex items-center justify-center px-4 cursor-default"
                         role="group"
                         aria-roledescription="slide"
                         aria-label={`Image ${index + 1} of ${images.length}: ${image.alt}`}
+                        onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
                       >
                         <img
                           src={image.src}

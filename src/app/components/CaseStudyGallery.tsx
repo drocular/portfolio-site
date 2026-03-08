@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 // @ts-expect-error — no type declarations for react-responsive-masonry
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Section } from './Section';
@@ -25,6 +26,12 @@ export function CaseStudyGallery({
   onImageClick,
   onClose,
 }: CaseStudyGalleryProps) {
+  // Remember the last valid index so closing doesn't flash index 0
+  const lastValidIndex = useRef(0);
+  if (lightboxIndex !== null) {
+    lastValidIndex.current = lightboxIndex;
+  }
+
   return (
     <>
       <Section variant={variant}>
@@ -53,7 +60,7 @@ export function CaseStudyGallery({
 
       <GalleryLightbox
         images={images}
-        initialIndex={lightboxIndex ?? 0}
+        initialIndex={lightboxIndex ?? lastValidIndex.current}
         isOpen={lightboxIndex !== null}
         onClose={onClose}
       />

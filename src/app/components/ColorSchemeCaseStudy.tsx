@@ -10,46 +10,79 @@ import { OutcomeGrid } from './OutcomeGrid';
 import { CaseStudyGallery, type GalleryImage } from './CaseStudyGallery';
 import { GalleryThumbnail } from './GalleryThumbnail';
 
+// Gallery images ordered to balance masonry columns (tall/short alternating)
 const galleryImages: GalleryImage[] = [
+  // 0 — col1: wide landscape
   {
-    src: 'https://picsum.photos/seed/cs-palette/600/400',
-    alt: 'Color palette overview showing 10 full-spectrum palettes',
-    caption: 'Full-spectrum palette architecture',
+    src: '/Images/Color Scheme/Full Palette.png',
+    alt: 'The new unified full-spectrum color palette',
+    caption: 'Unified full-spectrum palette',
   },
+  // 1 — col2: tall portrait
   {
-    src: 'https://picsum.photos/seed/cs-tokens/500/700',
-    alt: 'Token hierarchy diagram from raw values to component tokens',
-    caption: 'Four-layer token hierarchy',
+    src: '/Images/Color Scheme/Palette Comparison.png',
+    alt: 'Side-by-side comparison of Ant Design and MUI palettes showing minimal alignment',
+    caption: 'Ant vs MUI — where they align (and mostly don\'t)',
   },
+  // 2 — col3: wide landscape
   {
-    src: 'https://picsum.photos/seed/cs-figma/600/450',
-    alt: 'Figma variables panel showing shared color tokens',
-    caption: 'Shared Figma variables panel',
+    src: '/Images/Color Scheme/System diagram.png',
+    alt: 'System diagram showing how all color system pieces fit together',
+    caption: 'How it all fits together',
   },
+  // 3 — col1: square-ish
   {
-    src: 'https://picsum.photos/seed/cs-audit/400/500',
-    alt: 'Before and after color audit comparison',
-    caption: 'Color audit — before and after',
+    src: '/Images/Color Scheme/MUI Colors.png',
+    alt: 'The Material UI color palette before unification',
+    caption: 'MUI color palette',
   },
+  // 4 — col2: wide landscape
   {
-    src: 'https://picsum.photos/seed/cs-semantic/700/400',
-    alt: 'Semantic color mapping across both design systems',
-    caption: 'Semantic color mapping',
+    src: '/Images/Color Scheme/Dark mode comparison.png',
+    alt: 'Color tokens rendered in both light and dark modes',
+    caption: 'Dark mode comparison',
   },
+  // 5 — col3: tall portrait
   {
-    src: 'https://picsum.photos/seed/cs-component/500/600',
-    alt: 'Component tokens applied to button variants',
-    caption: 'Component token usage in buttons',
+    src: '/Images/Color Scheme/Figma Variables.png',
+    alt: 'Figma Variables panel showing the shared token structure',
+    caption: 'Figma Variables — single source of truth',
   },
+  // 6 — col1: very tall
   {
-    src: 'https://picsum.photos/seed/cs-a11y/600/350',
-    alt: 'Accessibility contrast ranges built into palettes',
-    caption: 'Built-in accessibility ranges',
+    src: '/Images/Color Scheme/Ant Design Colors.png',
+    alt: 'The Ant Design color palette before unification',
+    caption: 'Ant Design color palette',
   },
+  // 7 — col2: square-ish
   {
-    src: 'https://picsum.photos/seed/cs-adoption/500/400',
-    alt: 'Team adoption metrics dashboard',
-    caption: 'Cross-team adoption dashboard',
+    src: '/Images/Color Scheme/Combined Chips.png',
+    alt: 'Core colors united into a single set of shared chips',
+    caption: 'Core colors united',
+  },
+  // 8 — col3: square-ish
+  {
+    src: '/Images/Color Scheme/Color Audit.png',
+    alt: 'Color audit presentation prepared for leadership',
+    caption: 'Color audit — leadership proposal',
+  },
+  // 9 — col1: wide landscape
+  {
+    src: '/Images/Color Scheme/Tokens Diagram.png',
+    alt: 'Diagram proposing how to view the token system hierarchy',
+    caption: 'Token system proposal (unused)',
+  },
+  // 10 — col2: square-ish
+  {
+    src: '/Images/Color Scheme/Naming conventions.png',
+    alt: 'Proposed naming convention for color tokens',
+    caption: 'Naming convention proposal (unused)',
+  },
+  // 11 — col3: square-ish
+  {
+    src: '/Images/Color Scheme/Token naming proposal.png',
+    alt: 'Proposed arrangement for token naming structure',
+    caption: 'Token naming proposal (unused)',
   },
 ];
 
@@ -110,6 +143,19 @@ export function ColorSchemeCaseStudy() {
             }}
             connector="but"
           />
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.2}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[1]}
+              index={1}
+              onClick={setLightboxIndex}
+            />
+          </div>
         </AnimatedSection>
       </Section>
 
@@ -193,11 +239,18 @@ export function ColorSchemeCaseStudy() {
             <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
               From the project
             </span>
-            <GalleryThumbnail
-              image={galleryImages[4]}
-              index={4}
-              onClick={setLightboxIndex}
-            />
+            <div className="flex flex-wrap gap-4">
+              <GalleryThumbnail
+                image={galleryImages[0]}
+                index={0}
+                onClick={setLightboxIndex}
+              />
+              <GalleryThumbnail
+                image={galleryImages[5]}
+                index={5}
+                onClick={setLightboxIndex}
+              />
+            </div>
           </div>
         </AnimatedSection>
       </Section>
@@ -221,6 +274,19 @@ export function ColorSchemeCaseStudy() {
               { title: 'Foundation for theming', description: 'The token architecture directly supports dark mode, brand theming, and future system expansion.' },
             ]}
           />
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[2]}
+              index={2}
+              onClick={setLightboxIndex}
+            />
+          </div>
         </AnimatedSection>
       </Section>
 
