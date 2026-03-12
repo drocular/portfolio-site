@@ -8,6 +8,8 @@ function CaseStudyLink({ to, children }: { to: string; children: React.ReactNode
   return (
     <Link
       to={to}
+      target="_blank"
+      rel="noopener noreferrer"
       className="inline-flex items-center gap-1 text-[var(--accent)] hover:underline underline-offset-2"
     >
       {children}

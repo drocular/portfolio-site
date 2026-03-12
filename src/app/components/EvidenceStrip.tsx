@@ -40,7 +40,7 @@ export function EvidenceStrip({ items, caption }: EvidenceStripProps) {
           </div>
         </div>
         {caption && (
-          <p className="text-xs text-[var(--text-tertiary)] text-center mt-4">
+          <p className="text-sm text-[var(--text-secondary)] text-center mt-4">
             {caption}
           </p>
         )}

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CaseStudyLayout } from './CaseStudyLayout';
 import { Section } from './Section';
 import { AnimatedSection } from './AnimatedSection';
@@ -5,8 +6,76 @@ import { InsightBlock } from './InsightBlock';
 import { NarrativeBreak } from './NarrativeBreak';
 import { TensionPair } from './TensionPair';
 import { OutcomeGrid } from './OutcomeGrid';
+import { CaseStudyGallery, type GalleryImage } from './CaseStudyGallery';
+import { GalleryThumbnail } from './GalleryThumbnail';
+
+// Gallery images ordered to balance masonry columns (tall/short alternating)
+const galleryImages: GalleryImage[] = [
+  // 0 — col1: very short/wide
+  {
+    src: '/Images/Tables/Old tables.png',
+    alt: 'The original static table component with fixed 5x5 grid',
+    caption: 'The old table — rigid and limited',
+  },
+  // 1 — col2: tall/square
+  {
+    src: '/Images/Tables/Affinity mapping.png',
+    alt: 'Affinity mapping exercise organizing research findings',
+    caption: 'Affinity mapping research findings',
+  },
+  // 2 — col3: wide
+  {
+    src: '/Images/Tables/Table columns.png',
+    alt: 'The new column-based table architecture',
+    caption: 'Column-based architecture — the breakthrough',
+  },
+  // 3 — col1: wide
+  {
+    src: '/Images/Tables/Research synth.png',
+    alt: 'Research synthesis consolidating designer feedback and usage data',
+    caption: 'Research synthesis — what designers actually need',
+  },
+  // 4 — col2: tall/square
+  {
+    src: '/Images/Tables/Usability test.png',
+    alt: 'Usability testing session with designers using the new table component',
+    caption: 'Usability testing the redesign',
+  },
+  // 5 — col3: wide
+  {
+    src: '/Images/Tables/New table props.png',
+    alt: 'The redesigned table component properties panel',
+    caption: 'New table props — flexible without complexity',
+  },
+  // 6 — col1: wide-ish
+  {
+    src: '/Images/Tables/Figma analytics.png',
+    alt: 'Figma analytics showing component usage and detachment patterns',
+    caption: 'Figma analytics — tracking detachment signals',
+  },
+  // 7 — col2: wide-ish
+  {
+    src: '/Images/Tables/Unmoderated test.png',
+    alt: 'Unmoderated usability test results',
+    caption: 'Unmoderated test results',
+  },
+  // 8 — col3: square-ish
+  {
+    src: '/Images/Tables/Table slot experiment.png',
+    alt: 'Experimenting with slot-based table cell architecture',
+    caption: 'Slot experiment — exploring composability',
+  },
+  // 9 — col1: wide
+  {
+    src: '/Images/Tables/Table playground.png',
+    alt: 'Interactive table playground for designers to test configurations',
+    caption: 'Table playground — try before you build',
+  },
+];
 
 export function TableComponentCaseStudy() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <CaseStudyLayout
       studyId="table-component"
@@ -28,6 +97,19 @@ export function TableComponentCaseStudy() {
           <p className="text-[var(--text-secondary)] mt-4">
             The existing Table component was essentially static: 5 columns, 5 rows, with only basic properties. Any real customization required detaching, which is exactly what a design system component should prevent. The answer to "how do I add more columns?" was always "detach it and build what you need."
           </p>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[0]}
+              index={0}
+              onClick={setLightboxIndex}
+            />
+          </div>
         </AnimatedSection>
       </Section>
 
@@ -62,6 +144,19 @@ export function TableComponentCaseStudy() {
             connector="vs"
           />
         </AnimatedSection>
+
+        <AnimatedSection delay={0.2}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[6]}
+              index={6}
+              onClick={setLightboxIndex}
+            />
+          </div>
+        </AnimatedSection>
       </Section>
 
       <NarrativeBreak variant="marker" marker="The surprise in the data" />
@@ -88,6 +183,19 @@ export function TableComponentCaseStudy() {
             { title: 'Validated building-block philosophy', description: 'Giving people raw materials may matter more than giving them finished solutions.' },
           ]} />
         </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[2]}
+              index={2}
+              onClick={setLightboxIndex}
+            />
+          </div>
+        </AnimatedSection>
       </Section>
 
       <NarrativeBreak variant="line" />
@@ -97,6 +205,14 @@ export function TableComponentCaseStudy() {
         label="The mental model shift"
         insight="Without post-launch analytics, I would have declared success based on the solution I built. The data showed success was happening, just not where I expected. Design systems work best when they give people the right primitives, not when they try to predict every use case."
         context="It's the difference between building a kitchen and delivering meals. Both feed people, but one creates ongoing capability."
+      />
+
+      <CaseStudyGallery
+        heading="Project gallery"
+        images={galleryImages}
+        lightboxIndex={lightboxIndex}
+        onImageClick={setLightboxIndex}
+        onClose={() => setLightboxIndex(null)}
       />
     </CaseStudyLayout>
   );

@@ -13,7 +13,7 @@ export function DesignTokensCaseStudy() {
       studyId="design-tokens"
       lede="Sustainable infrastructure over perfect systems"
       title="Implementing Design Tokens at Scale"
-      subtitle="We were spending all our energy maintaining two complete systems. The question wasn't how to unify them. It was what we could actually sustain."
+      subtitle="We were spending all our energy maintaining two complete systems. The question wasn't how to unify them, it was what we could actually sustain."
       tags={[
         { label: 'Design Tokens' },
         { label: 'Strategy' },
@@ -70,36 +70,68 @@ export function DesignTokensCaseStudy() {
       <InsightBlock
         variant="prominent"
         label="What I didn't predict"
-        insight="AI tools started consuming design tokens. The architecture we built for sustainability turned out to be exactly what emerging tools needed. We were future-proof for reasons we didn't even anticipate. That's the best kind of validation."
+        insight="Design tokens are code. And code is machine-readable in a way that visual design never will be. The architecture we built for sustainability turned out to be inherently AI-ready — not because we designed it for AI, but because we designed it as structured data."
         context="When your strategic direction gets validated by forces you didn't foresee, it usually means you found the right layer of abstraction."
         showLayers
       />
 
-      {/* --- Driving the change --- */}
+      {/* --- Expanding the foundation --- */}
       <Section variant="muted">
         <AnimatedSection>
           <h2>Expanding the foundation</h2>
           <p className="text-[var(--text-secondary)] mt-6">
-            I expanded beyond color to comprehensive token coverage: typography, spacing, elevation, and more. Now leading alignment workshops to establish tokens as our single source of truth. This freed our engineer from full-time theme maintenance to work on higher-value projects.
+            I built out the primitive and semantic token layers as a proof of concept, then ran a workshop with the team to pitch the vision and gather input on what governance would look like. The response validated the direction: teams saw how tokens could give them autonomy while keeping the system consistent.
           </p>
           <p className="text-[var(--text-secondary)] mt-4">
-            This isn't about doing less. It's about focusing effort where it creates the most leverage. Teams maintain their flexibility. We maintain something sustainable. And we're positioned for whatever tools emerge next.
+            The next challenge was component tokens. 108 components across two libraries, each needing its own token mappings. My initial plan was to divide the work across the team. Then I had a better idea.
           </p>
         </AnimatedSection>
       </Section>
 
-      {/* --- Expected impact --- */}
-      <Section width="wide">
+      <NarrativeBreak variant="marker" marker="The multiplier" />
+
+      {/* --- AI agent approach --- */}
+      <Section>
         <AnimatedSection>
-          <h2>Expected impact</h2>
+          <h2>Scaling with leverage</h2>
+        </AnimatedSection>
+        <AnimatedSection delay={0.1}>
+          <TensionPair
+            left={{
+              label: 'The manual path',
+              content: 'Distribute the 108 components across the team. Each person maps tokens for their assigned components. Weeks of work, inconsistent results, constant alignment needed.',
+            }}
+            right={{
+              label: 'What I built instead',
+              content: 'An AI agent loaded with the token structure, my primitives, my semantics, and constrained to only reference Ant Design and MUI documentation. It generated component tokens at a pace no team could match.',
+            }}
+            connector="vs"
+          />
+        </AnimatedSection>
+      </Section>
+
+      <EvidenceStrip
+        items={[
+          { value: '108', label: 'total components' },
+          { value: '71', label: 'unique components tokenized', emphasis: true },
+          { value: '~1,100', label: 'component tokens generated' },
+          { value: '~2', label: 'days to complete' },
+        ]}
+        caption="To validate and refine the output, I built a React demo site showing every component, its token connections, and a live demo page — using real React components to prove these tokens can make anything look like what's in production."
+      />
+
+      {/* --- What this built --- */}
+      <Section variant="muted" width="wide">
+        <AnimatedSection>
+          <h2>What this built</h2>
           <p className="text-[var(--text-secondary)] mt-6 mb-2">
-            In progress, but the trajectory is clear.
+            What started as a sustainability play became a force multiplier.
           </p>
           <OutcomeGrid variant="featured" columns={2} items={[
             { title: 'Reduced maintenance burden', description: 'One token foundation instead of two complete system themes.' },
             { title: 'Design consistency maintained', description: 'Without forcing standardization or disrupting entrenched workflows.' },
-            { title: 'AI tool readiness', description: 'Emerging tools can generate on-brand work using our tokens directly.' },
-            { title: 'Team autonomy preserved', description: 'Teams keep their preferred tools while we govern what actually needs governance.' },
+            { title: '71 components tokenized', description: 'An AI agent generated component tokens in days, not weeks — with a single consistent vision.' },
+            { title: 'Live validation site', description: 'A React demo site proving tokens work in production, with every component and connection visible.' },
           ]} />
         </AnimatedSection>
       </Section>
