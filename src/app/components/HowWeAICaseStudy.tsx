@@ -1,11 +1,57 @@
+import { useState } from 'react';
 import { CaseStudyLayout } from './CaseStudyLayout';
 import { Section } from './Section';
 import { AnimatedSection } from './AnimatedSection';
 import { InsightBlock } from './InsightBlock';
 import { NarrativeBreak } from './NarrativeBreak';
 import { EvidenceStrip } from './EvidenceStrip';
+import { CaseStudyGallery, type GalleryImage } from './CaseStudyGallery';
+import { GalleryThumbnail } from './GalleryThumbnail';
+
+// Gallery images ordered to balance masonry columns
+// 3 very tall site pages (one per column) + shorter images to balance
+const galleryImages: GalleryImage[] = [
+  // 0 — col1: wide
+  {
+    src: '/Images/How We AI/meeting.png',
+    alt: 'How We AI session in progress with attendees',
+    caption: 'A session in progress — 60+ attendees and growing',
+  },
+  // 1 — col2: very tall
+  {
+    src: '/Images/How We AI/how-we-ai.figma.events.png',
+    alt: 'How We AI companion site events page',
+    caption: 'Events page — session archive and upcoming schedule',
+  },
+  // 2 — col3: wide
+  {
+    src: '/Images/How We AI/signup form.png',
+    alt: 'Session submission form for presenters',
+    caption: 'Submission form — making participation effortless',
+  },
+  // 3 — col1: very tall
+  {
+    src: '/Images/How We AI/how-we-ai.figma.landing.png',
+    alt: 'How We AI companion site landing page',
+    caption: 'The companion site — hub for everything AI',
+  },
+  // 4 — col2: very short/wide
+  {
+    src: '/Images/How We AI/Slack message.png',
+    alt: 'Slack message showing organic community engagement',
+    caption: 'The flywheel in action — organic momentum',
+  },
+  // 5 — col3: very tall
+  {
+    src: '/Images/How We AI/how-we-ai.figma.tools.png',
+    alt: 'How We AI companion site tools directory',
+    caption: 'Tools directory — curated AI resource library',
+  },
+];
 
 export function HowWeAICaseStudy() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <CaseStudyLayout
       studyId="how-we-ai"
@@ -49,6 +95,26 @@ export function HowWeAICaseStudy() {
           <p className="text-[var(--text-secondary)] mt-4">
             The method was deliberate: push people to the site, recruit presenters when I hear they're doing interesting work, make regular announcements, maintain the cadence. Early consistency was critical because it built expectation. Now the momentum is self-sustaining. People pitch sessions, volunteer to present, and hold each other accountable to the schedule.
           </p>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <div className="flex flex-wrap gap-4">
+              <GalleryThumbnail
+                image={galleryImages[0]}
+                index={0}
+                onClick={setLightboxIndex}
+              />
+              <GalleryThumbnail
+                image={galleryImages[3]}
+                index={3}
+                onClick={setLightboxIndex}
+              />
+            </div>
+          </div>
         </AnimatedSection>
       </Section>
 
@@ -95,6 +161,17 @@ export function HowWeAICaseStudy() {
               </div>
             ))}
           </div>
+
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[4]}
+              index={4}
+              onClick={setLightboxIndex}
+            />
+          </div>
         </AnimatedSection>
       </Section>
 
@@ -105,6 +182,14 @@ export function HowWeAICaseStudy() {
         label="The transferable pattern"
         insight="This approach scales beyond AI. Any time an organization faces emerging technology, the bottleneck is rarely the technology itself. It's the speed at which people learn to use it well. Build the space, show up consistently, make it easy to participate, and the network effects do the rest."
         context="The pattern is: lower friction, increase consistency, let compounding do the work. It's the same principle behind design systems, just applied to organizational learning."
+      />
+
+      <CaseStudyGallery
+        heading="Project gallery"
+        images={galleryImages}
+        lightboxIndex={lightboxIndex}
+        onImageClick={setLightboxIndex}
+        onClose={() => setLightboxIndex(null)}
       />
     </CaseStudyLayout>
   );
