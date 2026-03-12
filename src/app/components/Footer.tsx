@@ -19,7 +19,7 @@ export function Footer() {
           </a>
         </div>
         <div className="text-xs text-[var(--text-on-dark-secondary)] opacity-50 pt-6 border-t border-[var(--border-dark)]">
-          &copy; 2026 Joseph Lawsky
+          &copy; 2026 Joseph Lawsky <span className="mx-1">&middot;</span> Site built with the help of AI
         </div>
       </div>
     </footer>
