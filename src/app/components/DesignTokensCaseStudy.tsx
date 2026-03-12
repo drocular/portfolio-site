@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CaseStudyLayout } from './CaseStudyLayout';
 import { Section } from './Section';
 import { AnimatedSection } from './AnimatedSection';
@@ -6,8 +7,64 @@ import { NarrativeBreak } from './NarrativeBreak';
 import { TensionPair } from './TensionPair';
 import { EvidenceStrip } from './EvidenceStrip';
 import { OutcomeGrid } from './OutcomeGrid';
+import { CaseStudyGallery, type GalleryImage } from './CaseStudyGallery';
+import { GalleryThumbnail } from './GalleryThumbnail';
+
+// Gallery images ordered to balance masonry columns (tall/short alternating)
+const galleryImages: GalleryImage[] = [
+  // 0 — col1: wide
+  {
+    src: '/Images/Tokens/primitives.png',
+    alt: 'Primitive token layer showing raw design values',
+    caption: 'Primitives — the raw design values',
+  },
+  // 1 — col2: tall/square
+  {
+    src: '/Images/Tokens/Workshop.png',
+    alt: 'Workshop session pitching the token vision to the team',
+    caption: 'Workshop — pitching the vision',
+  },
+  // 2 — col3: wide
+  {
+    src: '/Images/Tokens/semantics.png',
+    alt: 'Semantic token layer mapping purpose to primitives',
+    caption: 'Semantics — purpose-driven naming',
+  },
+  // 3 — col1: wide
+  {
+    src: '/Images/Tokens/Token overview.png',
+    alt: 'Token demo site overview showing all components and connections',
+    caption: 'Token demo site — the full picture',
+  },
+  // 4 — col2: tall/square
+  {
+    src: '/Images/Tokens/Workshop context.png',
+    alt: 'Workshop context slides showing the governance discussion',
+    caption: 'Workshop context — governance planning',
+  },
+  // 5 — col3: wide
+  {
+    src: '/Images/Tokens/Tokens component page.png',
+    alt: 'Demo site component page showing token connections',
+    caption: 'Component page — every token mapped',
+  },
+  // 6 — col1: very tall
+  {
+    src: '/Images/Tokens/Component list.png',
+    alt: 'Full list of 108 components across both design systems',
+    caption: 'The full component list — 108 across two systems',
+  },
+  // 7 — col2: wide
+  {
+    src: '/Images/Tokens/tokens primitives page.png',
+    alt: 'Demo site primitives page showing the foundation layer',
+    caption: 'Primitives page — live in the demo site',
+  },
+];
 
 export function DesignTokensCaseStudy() {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   return (
     <CaseStudyLayout
       studyId="design-tokens"
@@ -86,6 +143,26 @@ export function DesignTokensCaseStudy() {
             The next challenge was component tokens. 108 components across two libraries, each needing its own token mappings. My initial plan was to divide the work across the team. Then I had a better idea.
           </p>
         </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="mt-10 pt-8 border-t border-[var(--border-light)]">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <div className="flex flex-wrap gap-4">
+              <GalleryThumbnail
+                image={galleryImages[1]}
+                index={1}
+                onClick={setLightboxIndex}
+              />
+              <GalleryThumbnail
+                image={galleryImages[0]}
+                index={0}
+                onClick={setLightboxIndex}
+              />
+            </div>
+          </div>
+        </AnimatedSection>
       </Section>
 
       <NarrativeBreak variant="marker" marker="The multiplier" />
@@ -120,6 +197,21 @@ export function DesignTokensCaseStudy() {
         caption="To validate and refine the output, I built a React demo site showing every component, its token connections, and a live demo page — using real React components to prove these tokens can make anything look like what's in production."
       />
 
+      <Section>
+        <AnimatedSection>
+          <div className="pt-2">
+            <span className="text-xs font-medium uppercase tracking-[0.15em] text-[var(--text-tertiary)] mb-4 block">
+              From the project
+            </span>
+            <GalleryThumbnail
+              image={galleryImages[3]}
+              index={3}
+              onClick={setLightboxIndex}
+            />
+          </div>
+        </AnimatedSection>
+      </Section>
+
       {/* --- What this built --- */}
       <Section variant="muted" width="wide">
         <AnimatedSection>
@@ -143,6 +235,14 @@ export function DesignTokensCaseStudy() {
         label="The principle underneath"
         insight="Sustainability beats perfection. A system you can actually maintain with the resources you have will always outperform a theoretically better system that slowly decays from neglect. The hardest part of systems work is choosing what not to own."
         context="Every design system team I've talked to is stretched thin. The ones that thrive aren't the ones with the most resources. They're the ones who found the right layer to control."
+      />
+
+      <CaseStudyGallery
+        heading="Project gallery"
+        images={galleryImages}
+        lightboxIndex={lightboxIndex}
+        onImageClick={setLightboxIndex}
+        onClose={() => setLightboxIndex(null)}
       />
     </CaseStudyLayout>
   );
